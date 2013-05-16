@@ -3,8 +3,10 @@ class Post < ActiveRecord::Base
 
   def self.search(query)
   	conditions =  <<-eos
- 	 to_tsvector('english', title) @@ to_tsquery('english', ?)
+ 	 to_tsvector('english', 
+ 	 	coalesce(title,'') || ' ' || coalesce(body, '')
+ 	 	) @@  to_tsquery('english', ?)
      eos
-  	where(conditions,query)
+    find(:all, :conditions => [conditions, query])
   end
 end
