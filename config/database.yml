@@ -7,7 +7,7 @@ development:
   adapter: postgresql
   database: pg_rock_development
   encoding: unicode
-  username: 
+  username: jinahadam
   password: 
  
 # Warning: The database defined as "test" will be erased and
@@ -17,6 +17,6 @@ test:
   adapter: postgresql
   database: pg_rock_test
   encoding: unicode
-  username: 
+  username: jinahadam
   password: 
 

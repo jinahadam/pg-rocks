@@ -2,10 +2,15 @@ class Post < ActiveRecord::Base
   attr_accessible :title, :body
 
   def self.search(query)
+  	mapped_query = sanitize_sql_array ["to_tsquery('english', ?)", query]
   	conditions =  <<-eos
- 		search_vector	@@  to_tsquery('english', ?)
+ 		search_vector	@@  #{mapped_query}
      eos
-    find(:all, :conditions => [conditions, query])
+
+     order = <<-eos
+     	ts_rank_cd(search_vector, #{mapped_query}) DESC
+     eos
+    where(conditions).order(order)
   end
 
 
