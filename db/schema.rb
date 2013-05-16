@@ -16,8 +16,11 @@ ActiveRecord::Schema.define(:version => 20130516153850) do
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.string   "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.tsvector "search_vector"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
+
+  add_index "posts", ["search_vector"], :name => "posts_search_idx"
 
 end
