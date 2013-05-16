@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+Post.find_or_create_by_title('Postgres is awesome')
+Post.find_or_create_by_title('Oracle something database')
+Post.find_or_create_by_title('Postgres is different from mysql')
+Post.find_or_create_by_title('Tips for mysql refugees')
+p = Post.find_or_create_by_title('TOP SECRET')
+p.body = "Postgress rocks"
+p.save
