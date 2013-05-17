@@ -1,6 +1,11 @@
 class Post < ActiveRecord::Base
   attr_accessible :title, :body
 
+  before_save do
+  	self.published ||= false
+  	true
+  end
+
   def self.search(query)
   	mapped_query = sanitize_sql_array ["to_tsquery('english', ?)", query]
   	conditions =  <<-eos
